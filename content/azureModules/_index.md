@@ -1,5 +1,5 @@
 ---
 title: "Azure Modules"
-bookCollapseSection: true
+bookCollapseSection: false
 ---
 
