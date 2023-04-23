@@ -11,7 +11,7 @@ In this post, I'll show you how to create a Bicep template for an Azure Storage 
 
 {{< ghcode "https://raw.githubusercontent.com/azMantas/bicepModules/main/storage/storageAccounts.bicep" >}}
 
-## storage Account Name
+## storageAccountName
 
 `storageAccountName` This parameter represents the name of the Azure Storage Account being created. When creating a new storage account, it is important to choose a unique and meaningful name that adheres to the Azure Storage naming conventions. The storage account name acts as an identifier for the account and is used when accessing or managing the storage account within Azure.
 
@@ -29,7 +29,7 @@ In the context of Azure Storage Accounts, the kind property refers to the type o
 
 `FileStorage` This type of storage account is specifically designed for storing files using Azure Files. It supports the Premium performance tier, offering low-latency and high transaction rates. However, `FileStorage` accounts do not support general-purpose workloads, as they do not support blobs, queues, or tables.
 
-## sku Name
+## skuName
 
 The `skuName` property in an Azure Storage Account refers to the SKU (Stock Keeping Unit) which represents a combination of performance tier and redundancy level. The SKU determines the pricing and capabilities of the storage account.Here's a brief explanation of the performance tiers and redundancy levels:
 
@@ -51,7 +51,7 @@ The `skuName` property in an Azure Storage Account refers to the SKU (Stock Keep
 
 When configuring the `skuName` property for a storage account, you need to specify the combination of performance tier and redundancy level you want to use. Each `skuName` has different pricing and capabilities, so it's essential to choose the one that best meets your performance, durability, and budget requirements.
 
-## supports Https Traffic Only
+## supportsHttpsTrafficOnly
 
 `supportsHttpsTrafficOnly` is a property of an Azure Storage Account that determines whether the storage account enforces the use of secure communication over HTTPS. When this property is set to `true`, the storage account only allows HTTPS traffic, which ensures that all communication between clients and the storage service is encrypted and secure.
 
@@ -60,11 +60,11 @@ By enforcing HTTPS-only access, you can prevent potential security risks associa
 In summary, enabling the `supportsHttpsTrafficOnly` property for an Azure Storage Account is a security best practice to protect your data during transit. It ensures that all communication with your storage account is encrypted and secure by only allowing HTTPS traffic.
 
 
-## is Hns Enabled
+## isHnsEnabled
 
  Hierarchical Namespace (HNS), also known as Azure Data Lake, is a cloud-based storage service from Microsoft. It is designed for big data analytics and can handle large amounts of structured and unstructured data. It offers scalable and cost-effective storage, allowing users to store, process, and analyze data efficiently and securely.
 
-## access Tier
+## accessTier
 
 The `accessTier` property in an Azure Storage Account determines the performance and access cost characteristics of the stored data. Azure Storage provides two access tiers: `Hot` and `Cool`. These tiers are available for Block Blob storage and Azure Blob Storage accounts. The purpose of these access tiers is to enable you to store and manage your data based on its access patterns and optimize costs.
 
@@ -76,7 +76,7 @@ When creating or modifying an Azure Storage Account, you can set the `accessTier
 
 By understanding the access patterns of your data and choosing the appropriate access tier, you can optimize the costs associated with your Azure Storage Account while meeting your performance and latency requirements.
 
-## minimum Tls Version
+## minimumTlsVersion
 
 `minimumTlsVersion` This property specifies the minimum supported version of the Transport Layer Security (TLS) protocol for your Azure Storage Account. TLS is a cryptographic protocol that provides secure communication between clients and servers over a network. It is widely used to secure web traffic, and in the case of Azure Storage Accounts, it secures communication between clients and the storage service.
 
@@ -92,7 +92,7 @@ For example, setting minimumTlsVersion to 'TLS1_2' in your storage account confi
 
 It is important to consider the potential impact on your clients when setting the minimum TLS version. Older clients or software libraries may not support newer TLS versions, which could lead to compatibility issues. However, it is generally recommended to use the highest possible minimum TLS version that your clients can support, in order to ensure the security of your storage account.
 
-## allow Shared Key Access
+## allowSharedKeyAccess
 
 `allowSharedKeyAccess` This property controls whether the storage account allows authentication using shared keys. Shared keys are account-level keys used for authenticating requests made against the storage account. There are two types of shared keys: the primary key and the secondary key. These keys can be used to sign requests made to the storage account, allowing the caller to perform operations within the scope of the storage account.
 
@@ -110,7 +110,7 @@ Advantages of using RBAC over shared keys (local authentication):
 
 - Key rotation and management: RBAC eliminates the need to rotate and manage shared keys, reducing the administrative overhead and potential for human error. With shared keys, you must manually manage and rotate keys to maintain security.
 
-## allow Blob Public Access
+## allowBlobPublicAccess
 
 `allowBlobPublicAccess` This property controls whether public read access is allowed for the blob containers in your storage account. Public read access means that anonymous users can read the data stored in the blob containers without providing any authentication.
 
@@ -118,7 +118,7 @@ When you set `allowBlobPublicAccess` to `true`, you enable the option to make bl
 
 In most scenarios, it is recommended to set `allowBlobPublicAccess` to `false` to protect your data from unauthorized access. If you need to provide public read access to specific blobs or containers, carefully evaluate the risks associated with exposing your data publicly.
 
-## allow cross tenant replication
+## allowCrossTenantReplication
 
 `allowCrossTenantReplication` is a property in Azure Storage Accounts that determines whether data in the storage account can be replicated across tenants. When enabled, it allows the storage account to participate in cross-tenant replication, which means that the data can be replicated to a secondary storage account located in a different Azure tenant. This can be useful for scenarios where you need to ensure data redundancy and disaster recovery across different organizations.
 
