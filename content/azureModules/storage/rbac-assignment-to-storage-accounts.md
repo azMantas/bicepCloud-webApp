@@ -15,21 +15,21 @@ draft: false
 I have developed two distinct modules to enhance the flexibility and functionality of managing access control in Azure environments. The first module allows for the assignment of RBAC roles to multiple principal IDs, while the second module supports the implementation of multiple role definitions.
 
 
-## array of principal id's
+## assign multiple users
 
 In situations where you need to assign the same RBAC role, such as 'Storage Blob Data Reader', to multiple users, this solution proves to be most efficient. To accomplish this, simply provide an array of object IDs, and the template will handle the rest. 
 
 {{< ghcode "https://raw.githubusercontent.com/azMantas/bicepModules/main/storage/roleAssignments-principals.bicep" >}}
 
 
-## array of role definitions
+## assign multiple role definitions
 
 In scenarios where you need to assign multiple roles to a single principal, this solution is highly effective. To achieve this, simply provide an array of role definitions, and the template will take care of the rest
 
 {{< ghcode "https://raw.githubusercontent.com/azMantas/bicepModules/main/storage/roleAssignments-roleDefinitions.bicep" >}}
 
 
-## GUID
+## RBAC resource name
 
 Azure RBAC (Role-Based Access Control) is a unique resource in the Azure ecosystem. Unlike other resources, it does not support human-readable names, and instead relies on GUIDs (Globally Unique Identifiers) for identification. When creating a new RBAC role through the Azure Portal, the platform automatically generates a GUID for each specific assignment.
 
