@@ -62,6 +62,8 @@ In summary, enabling the `supportsHttpsTrafficOnly` property for an Azure Storag
 
 ## is Hns Enabled
 
+ Hierarchical Namespace (HNS), also known as Azure Data Lake, is a cloud-based storage service from Microsoft. It is designed for big data analytics and can handle large amounts of structured and unstructured data. It offers scalable and cost-effective storage, allowing users to store, process, and analyze data efficiently and securely.
+
 ## access Tier
 
 The `accessTier` property in an Azure Storage Account determines the performance and access cost characteristics of the stored data. Azure Storage provides two access tiers: `Hot` and `Cool`. These tiers are available for Block Blob storage and Azure Blob Storage accounts. The purpose of these access tiers is to enable you to store and manage your data based on its access patterns and optimize costs.

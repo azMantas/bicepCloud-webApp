@@ -4,7 +4,7 @@ date: 2023-04-19T20:38:49+02:00
 draft: false
 ---
 
-# Implementing Role-Based Access Control for Azure Storage Accounts using Bicep modules
+# Implementing RBAC for Azure Storage Accounts
 
  To streamline the process of assigning RBAC roles to Azure Storage Accounts, we will utilize modules. These modules are designed to handle role assignment with ease, making it simpler to manage access rights across your environment. To assign an RBAC role to a storage account, you will need to provide the following information:
 
