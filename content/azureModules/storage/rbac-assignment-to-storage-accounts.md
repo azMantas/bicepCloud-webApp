@@ -6,7 +6,7 @@ draft: false
 
 # Implementing RBAC for Azure Storage Accounts
 
- To streamline the process of assigning RBAC roles to Azure Storage Accounts, we will utilize modules. These modules are designed to handle role assignment with ease, making it simpler to manage access rights across your environment. To assign an RBAC role to a storage account, you will need to provide the following information:
+ To streamline the process of assigning RBAC roles to Azure Storage Accounts, we will utilize Bicep modules. These modules are designed to handle role assignment with ease, making it simpler to manage access rights across your environment. To assign an RBAC role to a storage account, you will need to provide the following information:
 
 - Storage Account Name: The unique name of the target storage account to which you want to assign the role.
 - Role Definition ID: The unique identifier of the predefined or custom role you want to assign.
