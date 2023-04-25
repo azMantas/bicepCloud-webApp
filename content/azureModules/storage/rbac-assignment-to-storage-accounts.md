@@ -2,6 +2,8 @@
 title: "RBAC assignments"
 date: 2023-04-19T20:38:49+02:00
 draft: false
+weight: 20
+
 ---
 
 # Implementing RBAC for Azure Storage Accounts
@@ -29,7 +31,7 @@ In scenarios where you need to assign multiple roles to a single principal, this
 {{< ghcode "https://raw.githubusercontent.com/azMantas/bicepModules/main/storage/roleAssignments-roleDefinitions.bicep" >}}
 
 
-## RBAC resource name
+## RBAC resource name (GUID)
 
 Azure RBAC (Role-Based Access Control) is a unique resource in the Azure ecosystem. Unlike other resources, it does not support human-readable names, and instead relies on GUIDs (Globally Unique Identifiers) for identification. When creating a new RBAC role through the Azure Portal, the platform automatically generates a GUID for each specific assignment.
 
@@ -37,6 +39,9 @@ The challenge arises when automating RBAC assignment using Bicep modules, as it 
 
 To address this issue, a GUID is generated based on a combination of the principal ID, role ID, and resource ID. This approach ensures that each RBAC role is assigned a unique GUID, while also maintaining consistency across deployments. By using these three components, we can be confident that no two distinct RBAC roles will inadvertently share the same GUID, thus preventing potential conflicts and enhancing the overall reliability of the system.
 
-## known issues
+{{< hint warning >}}
+At the time of writing, Microsoft has not disclosed the algorithm used to generate GUIDs. If assigned role has a different GUID, you may encounter the error: "role assignment already exists." To resolve this issue, please manually remove the existing role assignment and redeploy the Bicep module.{{< /hint >}}
+
+# known issues
 
 It is important to note that deployment may fail if you attempt to mix multiple principal types, such as 'group' and 'ServicePrincipal', within the same assignment. To avoid any potential issues, ensure that you separate principal types accordingly.

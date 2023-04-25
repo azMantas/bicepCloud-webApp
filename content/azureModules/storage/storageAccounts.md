@@ -2,6 +2,8 @@
 title: "Storage Accounts"
 date: 2023-04-19T20:38:49+02:00
 draft: false
+weight: 10
+
 ---
 # Storage Account
 
@@ -81,12 +83,6 @@ By understanding the access patterns of your data and choosing the appropriate a
 `minimumTlsVersion` This property specifies the minimum supported version of the Transport Layer Security (TLS) protocol for your Azure Storage Account. TLS is a cryptographic protocol that provides secure communication between clients and servers over a network. It is widely used to secure web traffic, and in the case of Azure Storage Accounts, it secures communication between clients and the storage service.
 
 Setting a minimum TLS version helps ensure that only clients using a specific version or higher of TLS can access the storage account. This is important because older versions of TLS have known vulnerabilities and are considered less secure. By enforcing a higher minimum TLS version, you can protect your storage account from potential attacks that exploit these vulnerabilities.
-
-The minimumTlsVersion property accepts the following values:
-
- - TLS1_0
- - TLS1_1
- - TLS1_2
   
 For example, setting minimumTlsVersion to 'TLS1_2' in your storage account configuration ensures that only clients using TLS 1.2 or higher can access the storage account. This helps protect your storage account from potential attacks that target older, less secure versions of TLS.
 
@@ -110,6 +106,10 @@ Advantages of using RBAC over shared keys (local authentication):
 
 - Key rotation and management: RBAC eliminates the need to rotate and manage shared keys, reducing the administrative overhead and potential for human error. With shared keys, you must manually manage and rotate keys to maintain security.
 
+## defaultToOAuthAuthentication
+
+By setting the `defaultToOAuthAuthentication` parameter to `true`, you instruct Azure Storage to use Azure AD with OAuth as the default authentication mechanism when accessing the storage account instead of using Shared Access Keys or SAS tokens. 
+
 ## allowBlobPublicAccess
 
 `allowBlobPublicAccess` This property controls whether public read access is allowed for the blob containers in your storage account. Public read access means that anonymous users can read the data stored in the blob containers without providing any authentication.
@@ -126,6 +126,19 @@ Cross-tenant replication helps organizations to achieve higher levels of data re
 
 It's important to note that enabling cross-tenant replication for a storage account can have implications on data privacy, security, and compliance. Before enabling this feature, you should carefully consider your organization's requirements and ensure that you have the necessary permissions and agreements in place to store data across different tenants.
 
+## containers
+
+When creating a new container in an Azure Storage account, the 'parent' is set to 'blob' because the container is part of the Blob service. It signifies the hierarchy that the container belongs to, which is within the Blob service. The hierarchy structure in Azure Storage Account looks like this:
+
+- `Storage account` This is the top-level entity that represents your Azure Storage Account. It contains multiple services, such as Blob, File, Table, and Queue services.
+- `Blob service` This is a part of the Storage account, specifically designed for storing unstructured data as blobs.
+- `Container` This is a child of the Blob service, and it's a logical unit for organizing and storing blobs.
+- `Blob` This is the actual data object stored within a container.
+
+{{< hint warning >}}
+Container names in Azure Storage must begin and end with a letter or number, contain only lowercase letters, numbers, or dashes, and have no consecutive dashes. The name length should be between 3 and 63 characters.
+{{< /hint >}}
+
 ## networkAcls - deny
 
 The `defaultAction` property is part of the network access control settings in an Azure Storage Account. It specifies the default action to take when a request to access the storage account does not match any of the defined rules in the network access control list (ACL).
@@ -141,3 +154,14 @@ By using `Deny` as the default action, you can restrict access to your storage a
 When the bypass property is set to `AzureServices`, it means that certain Azure services can bypass the network ACLs and access the storage account without being restricted by the IP address or virtual network rules. This is useful in scenarios where you need to allow Azure services, such as Azure Monitor to access your storage account, while still enforcing network access control rules for other types of traffic.
 
 It is important to note that enabling `AzureServices` bypass does not grant access to all Azure services randomly. The actual access is still controlled by the Azure RBAC and authentication mechanisms in place. By allowing the bypass for Azure services, you are permitting these services to communicate with your storage account without being blocked by the network-level restrictions.
+
+## advancedThreatProtectionEnabled
+
+<a href="https://learn.microsoft.com/en-us/azure/defender-for-cloud/defender-for-storage-introduction" target="_blank">Defender for Storage Account</a>, a component of Azure Defender, offers enhanced security and threat detection for Azure Storage accounts, including Blob Storage, Data Lake Storage Gen2, and Azure Files. By continuously monitoring and analyzing activities, it detects abnormal and potentially malicious activities. Enabling the Advanced Threat Protection (ATP) feature using the `advancedThreatProtectionEnabled` parameter provides continuous monitoring and protection against threats and malicious activities in your storage account. This includes activities such as:
+- Anomaly Detection: Defender for Storage Account identifies and alerts you to abnormal access patterns, such as sudden traffic spikes, unusual data access locations, or attempts from suspicious IP addresses.
+- Data Exfiltration Detection: It detects potential data exfiltration activities, including large or unusual data transfers, which could indicate data theft.
+- Brute Force Attack Detection: Defender for Storage Account helps identify repetitive attempts to access the storage account with different credentials, indicating attempts to gain unauthorized access.
+
+{{< hint warning >}}
+Please note that Defender for Storage Account is not offered as a free service
+{{< /hint >}}
