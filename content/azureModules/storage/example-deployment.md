@@ -5,12 +5,14 @@ draft: false
 weight: 100
 ---
 
+In this blog post, I will walk you through the process of using the `storageAccount.bicep` template to create a resource in Azure. The module is preconfigured with default values for all parameters, simplifying the deployment process and reducing the likelihood of errors. However, if your specific use case demands customization or unique settings, you can effortlessly adjust these parameters to suit your requirements.
+We'll start by deploying a basic Storage Account, and then gradually harness the power of the template to tailor the settings to our needs.
 
 ## deploy a simple Storage Account
 
-In this tutorial, we will walk through the process of deploying an Azure Storage Account using a Bicep module. As with most Azure resources, the Storage Account must be deployed within a Resource Group — a logical container for resources deployed within an Azure subscription. To get started, we will create a new Resource Group that will house our Storage Account.
+Here will walk through the process of deploying an Azure Storage Account using a Bicep module. As with most Azure resources, the Storage Account must be deployed within a Resource Group — a logical container for resources deployed within an Azure subscription. To get started, we will create a new Resource Group that will house our Storage Account.
 
-To provision the Storage Account, we need to provide at least two values: `projectName` and `environment`. These inputs are essential for generating a unique Storage Account name, ensuring that it stick to Azure's naming conventions and does not conflict with existing resources. The Bicep module comes preconfigured with default values for all parameters, streamlining the deployment process and minimizing the risk of errors. However, if your use case requires customization or specific settings, you can easily modify these parameters according to your needs.
+To provision the Storage Account, we need to provide at least two values: `projectName` and `environment`. These inputs are essential for generating a unique Storage Account name, ensuring that it stick to Azure's naming conventions and does not conflict with existing resources.
 
 ```bicep
 targetScope = 'subscription'
@@ -93,6 +95,7 @@ output storageAccountName string = configParams.outputs.storageAccountName
 output storageAccountUrl string = configParams.outputs.storageAccountDfsUrl
 ```
 ## how to assign RBAC?
+
 Here we will demonstrate how to assign the 'Reader' and 'Blob Storage Reader' RBAC roles to an Azure AD group using the 'roleAssignments-roleDefinitions.bicep' module. Assigning these roles ensures that members of the Azure AD group have appropriate access to the Storage Account, enabling them to read its properties and metadata as well as access the Blob Storage content.
 
 To accomplish this, we will first need to specify the Resource Group where the Storage Account is located. This allows the Bicep module to target the correct resource for the role assignments. Following this, we must provide several parameters to the 'roleAssignments-roleDefinitions.bicep' module:
@@ -133,6 +136,7 @@ module assignMultipleRoles 'roleAssignments-roleDefinitions.bicep' = {
 ```
 
 ## create multiple Storage Accounts
+
 Here, we will demonstrate how to deploy multiple Storage Accounts using the same 'storageAccount.bicep' template. This approach enables us to efficiently create multiple Storage Accounts with a single Bicep template, streamlining the deployment process and reducing the potential for errors.
 
 First, we will generate a list of unique names for the Storage Accounts, which will be stored in a variable named `multipleStorageAccounts`. Following this, a loop will be employed to iterate through each name within the `multipleStorageAccounts` variable. During each iteration, the Bicep template will establish a Storage Account corresponding to the given name. In this particular example, a total of 15 Storage Accounts will be created, representing each name in the `multipleStorageAccounts` list. This ensures that a unique Storage Account name is generated based on the provided `projectName` for every iteration.
