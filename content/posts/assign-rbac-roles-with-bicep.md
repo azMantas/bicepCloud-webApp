@@ -7,7 +7,10 @@ tags: ["RBAC", "storageAccount"]
 In this blog post, we will walk through a step-by-step guide on how to assign Azure RBAC roles to Storage Accounts using Bicep. By the end of this post, you'll be equipped with the knowledge to create role assignments for your Azure resources. While this post will primarily focus on Azure Storage Accounts, the principles and techniques discussed can be easily adapted to suit other resources like KeyVault, AppServices and so on.
 
 ### bicep module to assign RBAC at the storage account level
-In this example, we'll create a Bicep module that assigns RBAC roles to users, groups, or service principals for a specific Azure storage account. To start, we'll need to provide the name of the Azure storage account where we want to assign the RBAC role. Next, we'll specify the principal IDs and types for the AzureAD objects who will receive the role assignment. Finally, we'll need to provide the RBAC role definition ID to define the role we want to assign to our users.
+In this example, we'll create a Bicep module that assigns RBAC roles to users, groups, or service principals for a specific Azure storage account.
+- provide the name of the Azure storage account where we want to assign the RBAC role.
+- specify the principal IDs and types for the AzureAD objects who will receive the role assignment.
+- provide the RBAC role definition ID to define the role we want to assign to our users.
 
 ```bicep
 @allowed([ 'User', 'ServicePrincipal', 'Group' ])
@@ -71,7 +74,11 @@ The challenge arises when automating RBAC assignment using Bicep modules, as it 
 To address this issue, a GUID is generated based on a combination of the principal ID, role ID, and resource ID. This approach ensures that each RBAC role is assigned a unique GUID, while also maintaining consistency across deployments. By using these three components, we can be confident that no two distinct RBAC roles will inadvertently share the same GUID, thus preventing potential conflicts and enhancing the overall reliability of the system.
 
 ### consuming module in the main.bicep file
-First, we'll create a resource group and deploy an Azure storage account to it. Next, we'll use a Bicep module to assign multiple RBAC roles to the same Azure AD object, in this case, an AD group. Since this module has a resource group deployment scope, we'll also need to specify the scope where the Azure storage account is provisioned. Finally, we'll need to provide the name of the storage account. The easiest way to do this is to reference the `simpleStorage` module and use its output as the input.
+- create a resource group and deploy an Azure storage account to it.
+- since this module has a resource group deployment scope, we'll also need to specify the scope where the Azure storage account is provisioned.
+- to assign RBAC roles to an AzureAD object, you need to provide their corresponding AzureAD object ID.
+- provide the RBAC role definition ID to define roles we want to assign to AzureAD group. 
+- provide the name of the storage account. The easiest way to do this is to reference the `simpleStorage` module and use its output as the input.
 
 ```bicep
 targetScope = 'subscription'
