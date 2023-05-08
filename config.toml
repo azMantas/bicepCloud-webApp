@@ -46,12 +46,12 @@ paginate = 5
     # lastModDisplay = ""
 
     [languages.en.params.logo]
-      logoText = "bicep cloud"
+      logoText = "bicep.cloud"
       logoHomeLink = "/"
     # or
     #
-    # path = "/img/your-example-logo.svg"
-    # alt = "Your example logo alt text"
+    # path = "/bicep.svg"
+    # alt = "bicep.cloud"
 
     # [languages.en.menu]
     #   [[languages.en.menu.main]]
